@@ -20,7 +20,7 @@
 
 ### Prerequisites
 
-- c++
+- java
 - pip
 - Git
 - MySQL installed and running
