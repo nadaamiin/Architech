@@ -1,6 +1,6 @@
-# Invest Wise
+# Architech
 
-**Invest Wise** is a personal finance and investment management app tailored for users in Egypt. It allows individuals to manage budgets, track investments, and securely access their financial data through a single linked bank account.
+**Architech** is a personal finance and investment management app tailored for users in Egypt. It allows individuals to manage budgets, track investments, and securely access their financial data through a single linked bank account.
 
 ## Features
 
