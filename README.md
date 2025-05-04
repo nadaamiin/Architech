@@ -20,9 +20,10 @@
 
 ### Prerequisites
 
+- c++
 - pip
 - Git
-- mySQL installed and running
+- PostgreSQL or MongoDB installed and running
 
 ### Installation
 
@@ -30,37 +31,48 @@
    ```bash
    git clone https://github.com/yourusername/invest-wise.git
    cd invest-wise
-Create and activate a virtual environment:
+   ````
 
-bash
-Copy
-Edit
-python -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate
-Install dependencies:
+2. Create and activate a virtual environment:
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Set up environment variables (DB URI, secret key, etc.) in a .env file.
+   ```bash
+   python -m venv env
+   source env/bin/activate  # On Windows: env\Scripts\activate
+   ```
 
-Run the server:
+3. Install dependencies:
 
-bash
-Copy
-Edit
-python app.py
-API Endpoints
-POST /signup – Register a new user
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-POST /login – Authenticate user and return token
+4. Set up environment variables (DB URI, secret key, etc.) in a `.env` file.
 
-GET /dashboard – Get user financial summary (auth required)
+5. Run the server:
 
-POST /investment – Add investment entry (auth required)
+   ```bash
+   python app.py
+   ```
 
-POST /budget – Set or update monthly budget (auth required)
+## API Endpoints
 
-License
+* `POST /signup` – Register a new user
+* `POST /login` – Authenticate user and return token
+* `GET /dashboard` – Get user financial summary *(auth required)*
+* `POST /investment` – Add investment entry *(auth required)*
+* `POST /budget` – Set or update monthly budget *(auth required)*
+
+## License
+
 MIT License
+
+---
+
+*Invest smart. Live wise.* 💼
+
+```
+
+---
+
+Let me know if you'd like me to generate the `.env` template or `requirements.txt` as well.
+```
