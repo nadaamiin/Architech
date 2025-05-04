@@ -69,10 +69,3 @@ MIT License
 ---
 
 *Invest smart. Live wise.* 💼
-
-```
-
----
-
-Let me know if you'd like me to generate the `.env` template or `requirements.txt` as well.
-```
