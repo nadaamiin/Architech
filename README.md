@@ -43,7 +43,7 @@
 3. Install dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r CS251-2025-S16-Aya-Investment-20230560-20230440-20231088-SDS.pdf
    ```
 
 4. Set up environment variables (DB URI, secret key, etc.) in a `.env` file.
