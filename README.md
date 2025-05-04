@@ -12,7 +12,7 @@
 
 ## Tech Stack
 
-- **Database**: PostgreSQL / MongoDB
+- **Database**: MySQL
 - **Authentication**: Token-based (JWT)
 - **Deployment**: Local server or cloud (e.g., Heroku)
 
@@ -23,7 +23,7 @@
 - c++
 - pip
 - Git
-- PostgreSQL or MongoDB installed and running
+- MySQL installed and running
 
 ### Installation
 
