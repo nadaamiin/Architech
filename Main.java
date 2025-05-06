@@ -2,13 +2,19 @@ import SignUp.SignUpService;
 import SignUp.SignUpOperation;
 import Login.LoginOperation;
 import Login.LoginService;
+import Assets.Asset;
+import Assets.Portfolio;
+import Assets.AssetTypes;
 import Add_card.User;
 import Add_card.Bank;
 import Add_card.BankAccount;
 import Add_card.CardInfo;
 import Add_card.BankAccManager;
+import zakat_calculation.ZakatReport;
 import java.util.HashMap;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -57,6 +63,7 @@ public class Main {
         }
 
 
+        System.out.println("-----------------------------------------");
         // Create a bank
         Bank bank = new Bank();
         bank.setName("Cairo Bank");
@@ -91,5 +98,40 @@ public class Main {
         // Try removing the account
         boolean removed = user.removeAccount();
         System.out.println("Account removed: " + removed);
+        System.out.println("-----------------------------------------");
+
+        try {
+            // Create sample assets
+            Asset goldAsset = new Asset(1, AssetTypes.Gold, "Gold Bar", 10, parseDate("2023-01-01"), 500.0);
+            Asset cryptoAsset = new Asset(2, AssetTypes.Crypto, "Bitcoin", 2, parseDate("2022-06-15"), 25000.0);
+            Asset stockAsset = new Asset(3, AssetTypes.Stock, "Tesla Shares", 5, parseDate("2021-12-10"), 800.0);
+            Asset estateAsset = new Asset(4, AssetTypes.Real_Estate, "Rental Property", 1, parseDate("2020-08-01"), 300000.0);
+
+            // Initialize Zakat Report
+            ZakatReport report = new ZakatReport();
+
+            // Add assets to the report
+            report.addAsset(goldAsset);
+            report.addAsset(cryptoAsset);
+            report.addAsset(stockAsset);
+            report.addAsset(estateAsset);
+
+            // Calculate total zakat
+            report.calcTotalZakat(null); // null is okay because factory handles strategy per asset
+
+            // Print total zakat
+            System.out.println("Total Zakat Due: $" + report.getTotalZakatDue());
+
+            // Generate PDF report (stub)
+            report.generatePdf("zakat_report.pdf");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    private static Date parseDate(String date) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+    }
+
 }

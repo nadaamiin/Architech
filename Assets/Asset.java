@@ -1,4 +1,6 @@
-class Asset {
+package Assets;
+
+public class Asset {
     private int assetID;
     private AssetTypes assetType;
     private String name;
