@@ -2,6 +2,13 @@ import SignUp.SignUpService;
 import SignUp.SignUpOperation;
 import Login.LoginOperation;
 import Login.LoginService;
+import Add_card.User;
+import Add_card.Bank;
+import Add_card.BankAccount;
+import Add_card.CardInfo;
+import Add_card.BankAccManager;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -50,5 +57,39 @@ public class Main {
         }
 
 
+        // Create a bank
+        Bank bank = new Bank();
+        bank.setName("Cairo Bank");
+        bank.setBankId("CB001");
+        bank.setValidBanks(new HashMap<>());
+
+        // Create a user
+        User user = new User();
+        user.setName("Nada Amin");
+        user.setUserId("NA123");
+
+        // Create card info
+        CardInfo card = new CardInfo();
+        card.setCardNumber("1234567812345678");
+        card.setCardHolderName("Nada Amin");
+        card.setExpiryDate("12/27");
+        card.setCvv("123");
+
+        // Create bank account
+        BankAccManager manager = new BankAccManager();
+        BankAccount account = manager.createAccount(user, bank, card);
+
+        // Validate account
+        boolean isValid = manager.validateAccount(account);
+        System.out.println("Account is valid: " + isValid);
+
+        // Print account info
+        System.out.println("User: " + account.getUser().getName());
+        System.out.println("Bank: " + account.getBank().getName());
+        System.out.println("Linked at: " + account.getLinkedAt());
+
+        // Try removing the account
+        boolean removed = user.removeAccount();
+        System.out.println("Account removed: " + removed);
     }
 }
