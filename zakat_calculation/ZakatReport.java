@@ -1,32 +1,30 @@
-//package zakat_calculation;
-////import com.itextpdf.text.*;
-////import com.itextpdf.text.pdf.PdfWriter;
-//import java.io.FileOutputStream;
-//import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
-//import java.util.*;
-//import java.util.List;
-//
-//import Assets.*;
-//
-//public class ZakatReport {
-//    private List<Asset> assets = new ArrayList<>();
-//    private Map<String, LocalDate> zakatDates = new HashMap<>();
-//    private double totalZakatDue = 0.0;
-//
-//    public void addAsset(Asset asset) {
-//        assets.add(asset);
-//        zakatDates.put(asset.getName(), LocalDate.now());
-//    }
-//
-//    public void calcTotalZakat(ZakatCalculator calculator) {
-//        totalZakatDue = 0;
-//        for (Asset asset : assets) {
-//            calculator = new ZakatCalculator(ZakatCalculatorFactory.getCalculator(asset.getAssetType()));
-//            totalZakatDue += calculator.calculate(asset);
-//        }
-//    }
-//
+package zakat_calculation;
+import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.List;
+
+import Assets.*;
+
+public class ZakatReport {
+    private List<Asset> assets = new ArrayList<>();
+    private Map<String, LocalDate> zakatDates = new HashMap<>();
+    private double totalZakatDue = 0.0;
+
+    public void addAsset(Asset asset) {
+        assets.add(asset);
+        zakatDates.put(asset.getName(), LocalDate.now());
+    }
+
+    public void calcTotalZakat(ZakatCalculator calculator) {
+        totalZakatDue = 0;
+        for (Asset asset : assets) {
+            calculator = new ZakatCalculator(ZakatCalculatorFactory.getCalculator(asset.getAssetType()));
+            totalZakatDue += calculator.calculate(asset);
+        }
+    }
+
 //    public void generatePdf(String filename) {
 //        Document document = new Document();
 //        try {
@@ -69,8 +67,8 @@
 //            e.printStackTrace();
 //        }
 //    }
-//
-//    public double getTotalZakatDue() {
-//        return totalZakatDue;
-//    }
-//}
+
+    public double getTotalZakatDue() {
+        return totalZakatDue;
+    }
+}
