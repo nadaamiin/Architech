@@ -18,11 +18,7 @@ public class UsernameVerifier extends LoginVerifier {
     // first search for the username, if found, will return the wrappee object to then check the password
     @Override
     public boolean login(String username, String password) {
-        if (!dbconnector.searchForUser(username)) {
-            System.out.println("Login failed: Username not found!!");
-            return false;
-        }
-        return wrappee.login(username, password);
+        return dbconnector.searchForUser(username) && wrappee.login(username, password);
     }
 }
 

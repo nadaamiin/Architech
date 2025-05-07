@@ -7,3 +7,5 @@ Niall Horan,Niall32,NiallHoran@gmail.com,Horan1direction
 Theo James,theo123,theojames@gmail.com,Theo_divergent
 nada,nada_amin,nada@gmail.com,Nada9999
 nadosha,nadosha_x,nadosha@gmail.com,Nadosha00
+Henry Cavil,HenryCAVIL,henrycavil@gmail.com,HENRY_5867
+Tom Holland,TomSpiderman,tomhollan@gmail.com,Tom_zendaya

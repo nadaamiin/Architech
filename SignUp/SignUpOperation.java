@@ -20,7 +20,7 @@ public class SignUpOperation implements SignUpService {
         this.fields = new ArrayList<>();
 
         // Strategy pattern is used
-        fields.add(new UsernameValidator(dbConnector));
+        fields.add(new UsernameValidator());
         fields.add(new PasswordValidator());
         fields.add(new NameValidator());
         fields.add(new EmailValidator());
@@ -43,7 +43,7 @@ public class SignUpOperation implements SignUpService {
 
         // else, validation successful and will add it to the file
         dbConnector.addUser(user);
-        System.out.println("Profile Created.");
+        System.out.println("\n--> Profile Created <--\n");
         return true;
     }
 }

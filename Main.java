@@ -3,6 +3,10 @@ import Core.UserData;
 import SignUp.SignUpService;
 import SignUp.SignUpOperation;
 import Login.LoginOperation;
+import SignUp.EmailValidator;
+import SignUp.PasswordValidator;
+import SignUp.UsernameValidator;
+import SignUp.NameValidator;
 import Login.LoginService;
 import Assets.Asset;
 import Assets.Portfolio;
@@ -31,29 +35,64 @@ public class Main {
                 scanner.nextLine();
 
                 if (choice == 1) { // signing a user
-                    System.out.print("Please enter your name: ");
-                    name = scanner.nextLine();
-                    System.out.print("Please enter your username: ");
-                    username = scanner.nextLine();
-                    System.out.print("Please enter your email: ");
-                    email = scanner.nextLine();
-                    System.out.print("Please enter your password: ");
-                    password = scanner.nextLine();
                     SignUpService service = new SignUpOperation();
+
+                    // validating name
+                    while (true) {
+                        System.out.print("- Please enter your name (max 100 characters): ");
+                        name = scanner.nextLine();
+                        UserData user = new UserData(name, "", "", "");
+                        if (new NameValidator().validate(user)) break;
+                        else System.out.println("  Invalid name format!!");
+                    }
+
+                    // validating username
+                    while (true) {
+                        System.out.print("- Please enter your username (must be unique, max 50 characters): ");
+                        username = scanner.nextLine();
+                        UserData user = new UserData(name, username, "", "");
+                        if (new UsernameValidator().validate(user)) break;
+                        else System.out.println("  Username already taken!!");
+                    }
+
+                    // validating email
+                    while (true) {
+                        System.out.print("- Please enter your email (must contain @mailtype.com): ");
+                        email = scanner.nextLine();
+                        UserData user = new UserData(name, username, email, "");
+                        if (new EmailValidator().validate(user)) break;
+                        else System.out.println("  Invalid email format!!");
+                    }
+
+                    // validating password
+                    while (true) {
+                        System.out.print("- Please enter your password (max 100 characters, must include at least 1 uppercase char, and at least 1 number or special character): ");
+                        password = scanner.nextLine();
+                        UserData user = new UserData(name, username, email, password);
+                        if (new PasswordValidator().validate(user)) break;
+                        else System.out.println("  Invalid password!!");
+                    }
+
+                    // check if all the fields are validated, then would save the users data
                     if (service.signup(name, username, email, password)) {
                         Userverified = true;
                     }
-                } else if (choice == 2) { // logging in
-                    System.out.print("Please enter your username: ");
-                    username = scanner.nextLine();
-                    System.out.print("Please enter your password: ");
-                    password = scanner.nextLine();
 
-                    LoginOperation login = new LoginOperation("users.txt");
-                    if (login.login(username, password)) {
-                        Userverified = true;
+                }else if(choice == 2) { // logging in
+                    while(true) {
+                        System.out.print("\nPlease enter your username: ");
+                        username = scanner.nextLine();
+                        System.out.print("Please enter your password: ");
+                        password = scanner.nextLine();
+
+                        LoginOperation login = new LoginOperation("users.txt");
+                        if (login.login(username, password)) {
+                            Userverified = true;
+                            break;
+                        } else {
+                            System.out.println("Login failed: Invalid username or password.");
+                        }
                     }
-
                 } else if (choice == 3) {
                     System.out.println("Thank you for using the app!!");
                     System.exit(0);
@@ -63,8 +102,9 @@ public class Main {
                 scanner.nextLine();
             }
         }
+
         if(choice == 1){
-            System.out.println("Please enter your information to add a bank account.");
+            System.out.println("\nPlease enter your information to add a bank account.");
 
             UserData userData = new UserData();
             userData.setUsername(username);
@@ -131,10 +171,6 @@ public class Main {
                 System.out.println("\nFailed to link bank account due to invalid data.");
             }
         }
-
-        System.out.println("What would you like to do");
-
-
 
 //        Portfolio portfolio = new Portfolio();
 //
