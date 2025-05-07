@@ -28,7 +28,7 @@ public class SignUpOperation implements SignUpService {
 
     // implementing the signup method from the interface sign up service
     @Override
-    public void signup(String name, String username, String email, String password) {
+    public boolean signup(String name, String username, String email, String password) {
         // object of user data
         UserData user = new UserData(name, username, email, password);
 
@@ -37,12 +37,13 @@ public class SignUpOperation implements SignUpService {
             // if one of the fields didn't pass the validation check, will output invalid
             if (!validator.validate(user)) {
                 System.out.println("Sign up failed!!");
-                return;
+                return false;
             }
         }
 
         // else, validation successful and will add it to the file
         dbConnector.addUser(user);
         System.out.println("Profile Created.");
+        return true;
     }
 }

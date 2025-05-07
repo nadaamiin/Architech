@@ -4,3 +4,4 @@ Amy Smith,Amy367,Amysmith@gmail.com,Amy_secret
 Zayn Malik,ZaynKhai,ZaynMalik@gmail.com,Khai_Zayn
 Harry Styles,Harry,HarryStyles@gmail.com,oneDirection_
 Niall Horan,Niall32,NiallHoran@gmail.com,Horan1direction
+Theo James,theo123,theojames@gmail.com,Theo_divergent
