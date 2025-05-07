@@ -1,5 +1,9 @@
 package Assets;
 
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class Asset {
     private int assetID;
     private AssetTypes assetType;
@@ -7,15 +11,21 @@ public class Asset {
     private int quantity;
     private java.util.Date purchaseDate;
     private double price;
+    private String username; // Link to user
 
-    public Asset(int assetID, AssetTypes assetType, String name, int quantity, java.util.Date purchaseDate, double price) {
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    public Asset(int assetID, AssetTypes assetType, String name, int quantity,
+                 java.util.Date purchaseDate, double price, String username) {
         this.assetID = assetID;
         this.assetType = assetType;
         this.name = name;
         this.quantity = quantity;
         this.purchaseDate = purchaseDate;
         this.price = price;
+        this.username = username;
     }
+
 
     public String getName() {
         return name;
@@ -49,6 +59,9 @@ public class Asset {
         return assetID;
     }
 
+    public String getUsername() { return username; }
+
+
     public AssetTypes getAssetType() {
         return assetType;
     }
@@ -59,6 +72,21 @@ public class Asset {
 
     @Override
     public String toString() {
-        return "Asset ID: " + assetID + ", Name: " + name + ", Type: " + assetType + ", Quantity: " + quantity + ", Date: " + purchaseDate + ", Price: " + price;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return assetID + "," + name + "," + assetType + "," + quantity + "," +
+                sdf.format(purchaseDate) + "," + price + "," + username;
+    }
+
+
+    public static Asset fromString(String line) throws ParseException {
+        String[] parts = line.split("\\|");
+        int id = Integer.parseInt(parts[0]);
+        AssetTypes type = AssetTypes.valueOf(parts[1]);
+        String name = parts[2];
+        int quantity = Integer.parseInt(parts[3]);
+        Date date = sdf.parse(parts[4]);
+        double price = Double.parseDouble(parts[5]);
+        String username = parts[6];
+        return new Asset(id, type, name, quantity, date, price, username);
     }
 }
