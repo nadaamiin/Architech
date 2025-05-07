@@ -1,3 +1,5 @@
+import Add_card.*;
+import Core.UserData;
 import SignUp.SignUpService;
 import SignUp.SignUpOperation;
 import Login.LoginOperation;
@@ -5,11 +7,6 @@ import Login.LoginService;
 import Assets.Asset;
 import Assets.Portfolio;
 import Assets.AssetTypes;
-import Add_card.User;
-import Add_card.Bank;
-import Add_card.BankAccount;
-import Add_card.CardInfo;
-import Add_card.BankAccManager;
 import zakat_calculation.ZakatReport;
 import java.util.HashMap;
 import java.text.ParseException;
@@ -22,8 +19,8 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("\n------------------ Welcome to ARCHITECH ------------------");
-        int choice;
-        String name, username, email, password;
+        int choice = 0;
+        String name, username = " ", email, password;
         boolean Userverified = false;
         Scanner scanner = new Scanner(System.in);
         while(!Userverified){
@@ -46,7 +43,6 @@ public class Main {
                     if (service.signup(name, username, email, password)) {
                         Userverified = true;
                     }
-
                 } else if (choice == 2) { // logging in
                     System.out.print("Please enter your username: ");
                     username = scanner.nextLine();
@@ -63,10 +59,77 @@ public class Main {
                     System.exit(0);
                 }
             } catch (InputMismatchException e) {
-                    System.out.println("Invalid input! Please enter a number (1, 2, or 3).");
-                    scanner.nextLine();
+                System.out.println("Invalid input! Please enter a number (1, 2, or 3).");
+                scanner.nextLine();
+            }
+        }
+        if(choice == 1){
+            System.out.println("Please enter your information to add a bank account.");
+
+            UserData userData = new UserData();
+            userData.setUsername(username);
+            User user = new User();
+            user.setUserId(userData.getUsername());
+
+            Bank.setSuppBanks();
+
+            Bank selectedBank;
+            while (true) {
+                Bank.getBanks();
+                System.out.print("Enter the name of your bank: ");
+                String inputBankName = scanner.nextLine();
+                selectedBank = Bank.getBankByName(inputBankName);
+
+                if (selectedBank != null) {
+                    break;
+                } else {
+                    System.out.println("Unsupported bank. Please choose from the list above.");
+                }
+            }
+            CardInfo card = new CardInfo();
+            System.out.println("\nEnter Card Details:");
+
+            while (true) {
+                System.out.print("Card number (16 digits): ");
+                card.setCardNumber(scanner.nextLine());
+                if (card.isValidCardNumber()) break;
+                System.out.println("Invalid card number. Try again.!");
             }
 
+            while (true) {
+                System.out.print("Card holder name: ");
+                card.setCardHolderName(scanner.nextLine());
+                if (card.isValidCardHolderName()) break;
+                System.out.println("Card holder name cannot be empty.");
+            }
+
+            while (true) {
+                System.out.print("Expiry date (MM/yy or MM/yyyy): ");
+                card.setExpiryDate(scanner.nextLine());
+                if (card.isValidExpiryDate()) break;
+                System.out.println("Invalid or expired date. Try again!");
+            }
+
+            while (true) {
+                System.out.print("CVV (3 digits): ");
+                card.setCvv(scanner.nextLine());
+                if (card.isValidCVV()) break;
+                System.out.println("Invalid CVV. Try again.");
+            }
+
+            BankAccManager manager = new BankAccManager();
+            BankAccount account = manager.createAccount(user, selectedBank, card);
+
+            if (manager.validateAccount(account)) {
+                System.out.println("\nBank account linked successfully!");
+                System.out.println("Linked at: " + account.getLinkedAt());
+
+                // Save to file
+                CardDBConnector db = new CardDBConnector("accountsDB.txt");
+                db.saveCardData(selectedBank, card, user);
+            } else {
+                System.out.println("\nFailed to link bank account due to invalid data.");
+            }
         }
 
         System.out.println("What would you like to do");
