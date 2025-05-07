@@ -7,6 +7,7 @@ public class UserData {
     private String email;
     private String password;
 
+    public UserData(){}
     // constructor
     public UserData(String name, String username, String email, String password) {
         this.name = name;
@@ -20,4 +21,7 @@ public class UserData {
     public String getUsername() { return username; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
+    public void setUsername(String username){
+        this.username = username;
+    }
 }

@@ -53,4 +53,17 @@ public class CardInfo {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+    public String getCardHolderName() {
+        return cardHolderName;
+    }
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+    public String getCvv() {
+        return cvv;
+    }
 }

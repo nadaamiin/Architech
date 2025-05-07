@@ -7,6 +7,7 @@ public class DatabaseConnector {
     private final String filePath;
 
     // constructor
+
     public DatabaseConnector(String filePath) {
         this.filePath = filePath;
     }

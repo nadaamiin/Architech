@@ -1,7 +1,6 @@
 package Add_card;
 
 public class User {
-    private String name;
     private String userId;
     private BankAccount bankAccount;
 
@@ -22,14 +21,12 @@ public class User {
         }
         return false;
     }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
     public void setUserId(String userId) {
         this.userId = userId;
+
+    }
+    public String getUserId() {
+        return userId;
     }
 }
 
