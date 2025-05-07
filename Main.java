@@ -10,7 +10,7 @@ import Add_card.Bank;
 import Add_card.BankAccount;
 import Add_card.CardInfo;
 import Add_card.BankAccManager;
-import zakat_calculation.ZakatReport;
+//import zakat_calculation.ZakatReport;
 import java.util.HashMap;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -107,23 +107,23 @@ public class Main {
             Asset stockAsset = new Asset(3, AssetTypes.Stock, "Tesla Shares", 5, parseDate("2021-12-10"), 800.0);
             Asset estateAsset = new Asset(4, AssetTypes.Real_Estate, "Rental Property", 1, parseDate("2020-08-01"), 300000.0);
 
-            // Initialize Zakat Report
-            ZakatReport report = new ZakatReport();
-
-            // Add assets to the report
-            report.addAsset(goldAsset);
-            report.addAsset(cryptoAsset);
-            report.addAsset(stockAsset);
-            report.addAsset(estateAsset);
-
-            // Calculate total zakat
-            report.calcTotalZakat(null); // null is okay because factory handles strategy per asset
-
-            // Print total zakat
-            System.out.println("Total Zakat Due: $" + report.getTotalZakatDue());
-
-            // Generate PDF report (stub)
-            report.generatePdf("zakat_report.pdf");
+//            // Initialize Zakat Report
+//            ZakatReport report = new ZakatReport();
+//
+//            // Add assets to the report
+//            report.addAsset(goldAsset);
+//            report.addAsset(cryptoAsset);
+//            report.addAsset(stockAsset);
+//            report.addAsset(estateAsset);
+//
+//            // Calculate total zakat
+//            report.calcTotalZakat(null); // null is okay because factory handles strategy per asset
+//
+//            // Print total zakat
+//            System.out.println("Total Zakat Due: $" + report.getTotalZakatDue());
+//
+//            // Generate PDF report (stub)
+//            report.generatePdf("zakat_report.pdf");
 
         } catch (Exception e) {
             e.printStackTrace();
