@@ -222,7 +222,14 @@ public class Main {
                     System.out.print("Enter asset ID to remove: ");
                     int removeId = scanner.nextInt();
                     scanner.nextLine();
+                    Asset assetToDelete = portfolio.getAsset(removeId, username);
+                    if (assetToDelete == null) {
+                        System.out.println("Asset not found or does not belong to you.");
+                        break;
+                    }
+
                     portfolio.removeAsset(removeId, username);
+
                     System.out.println("Asset removed successfully!");
                     break;
 
