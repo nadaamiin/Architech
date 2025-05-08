@@ -9,8 +9,8 @@ public class UsernameValidator extends SignUpValidator {
     // it uses the database class to compare with the usernames already stored to check for uniqueness
     private DatabaseConnector dbConnector;
 
-    public UsernameValidator(DatabaseConnector dbConnector) {
-        this.dbConnector = dbConnector;
+    public UsernameValidator() {
+        this.dbConnector = new DatabaseConnector("users.txt");
     }
 
     // check the file of stored database to see if the username is unique or no
