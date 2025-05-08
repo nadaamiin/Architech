@@ -10,3 +10,4 @@ nadosha,nadosha_x,nadosha@gmail.com,Nadosha00
 Henry Cavil,HenryCAVIL,henrycavil@gmail.com,HENRY_5867
 Tom Holland,TomSpiderman,tomhollan@gmail.com,Tom_zendaya
 safia,safiaMo,safia@gmail.com,S12345
+Chris Evans,ChrisEvans,chrisevans@gmail.com,Chris_Evans

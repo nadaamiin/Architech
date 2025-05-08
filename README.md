@@ -10,20 +10,62 @@
 - Real-time financial summaries
 - Secure database storage and user data handling
 
-## Tech Stack
+## Files Included
+1. Core Components 
+   - DatabaseConnector.java: Manages MySQL database connections 
+   - UserData.java: Handles user profile information
 
-- **Database**: MySQL
-- **Authentication**: Token-based (JWT)
-- **Deployment**: Local server or cloud (e.g., Heroku)
+2. Banking Module (Add_card/)
+   - BankAccount.java: Base bank account class 
+   - CardDBConnector.java: Links cards to database 
+   - BankAccManager.java: Processes transactions
+
+3. Authentication 
+   
+Login:
+   - LoginOperation.java: Main login logic 
+   - LoginVerifier.java: Validates credentials
+   - Verifiers (UsernameVerifier, PasswordVerifier)
+
+SignUp:
+   - SignUpOperation.java: Registration handler 
+   - Validators (EmailValidator.java, PasswordValidator.java,NameValidator.Java,UsernameValidator)
+
+
+4. Zakat Calculation (zakat_calculation/)
+   - ZakatCalculator.java: Main calculator 
+   - Type-specific calculators (GoldZakatCalc.java, CryptoZakatCalc.java)
+   - ZakatReport.java: Generates compliance reports
+
+
+5. Asset Tracking (Assets/)
+   - Portfolio.java: Manages investment portfolio 
+   - AssetTypes.java: Defines asset categories
+
+
+6. Data Files 
+   - accountsDB.txt: Sample bank accounts 
+   - users.txt: Store users credentials
+
+## Tools Used
+1. Development:
+   - Java 11 
+   - IntelliJ IDEA (Project file: Architech.iml)
+
+
+2. Database:
+   - Text files
+
+
+3. Version Control: Git
+
 
 ## Getting Started
 
 ### Prerequisites
-
 - java
 - pip
 - Git
-- MySQL installed and running
 
 ### Installation
 
