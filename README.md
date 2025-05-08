@@ -23,14 +23,17 @@
 3. Authentication 
 
    Login:
-        - LoginOperation.java: Main login logic 
-        - LoginVerifier.java: Validates credentials
-        - Verifiers (UsernameVerifier, PasswordVerifier)
-
+     - LoginOperation.java: Main login logic 
+        
+     - LoginVerifier.java: Validates credentials
+          
+     - Verifiers (UsernameVerifier, PasswordVerifier)
 
    SignUp:
-         - SignUpOperation.java: Registration handler 
-         - Validators (EmailValidator.java, PasswordValidator.java,NameValidator.Java,UsernameValidator)
+   
+     - SignUpOperation.java: Registration handler 
+      
+     - Validators (EmailValidator.java, PasswordValidator.java,NameValidator.Java,UsernameValidator)
 
 
 4. Zakat Calculation (zakat_calculation/)
