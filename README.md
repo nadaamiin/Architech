@@ -21,15 +21,16 @@
    - BankAccManager.java: Processes transactions
 
 3. Authentication 
-   
-Login:
-   - LoginOperation.java: Main login logic 
-   - LoginVerifier.java: Validates credentials
-   - Verifiers (UsernameVerifier, PasswordVerifier)
 
-SignUp:
-   - SignUpOperation.java: Registration handler 
-   - Validators (EmailValidator.java, PasswordValidator.java,NameValidator.Java,UsernameValidator)
+   Login:
+        - LoginOperation.java: Main login logic 
+        - LoginVerifier.java: Validates credentials
+        - Verifiers (UsernameVerifier, PasswordVerifier)
+
+
+   SignUp:
+         - SignUpOperation.java: Registration handler 
+         - Validators (EmailValidator.java, PasswordValidator.java,NameValidator.Java,UsernameValidator)
 
 
 4. Zakat Calculation (zakat_calculation/)
