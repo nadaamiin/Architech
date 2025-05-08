@@ -15,7 +15,9 @@ public class ZakatReport {
         assets.add(asset);
         zakatDates.put(asset.getName(), LocalDate.now());
     }
-
+    public List<Asset> getAssets() {
+        return assets;
+    }
     public void calcTotalZakat(ZakatCalculator calculator) {
         totalZakatDue = 0;
         for (Asset asset : assets) {
