@@ -50,6 +50,7 @@
 6. Data Files 
    - accountsDB.txt: Sample bank accounts 
    - users.txt: Store users credentials
+   - assets.txt: store assets info
 
 ## Tools Used
 1. Development:
