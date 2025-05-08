@@ -2,6 +2,6 @@ package Assets;
 
 // Enum for Asset Types
 public enum AssetTypes {
-    Stock, Real_Estate, Crypto, Gold
+    STOCK, REAL_ESTATE, CRYPTO, GOLD
 }
 

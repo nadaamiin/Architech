@@ -7,17 +7,15 @@ import SignUp.EmailValidator;
 import SignUp.PasswordValidator;
 import SignUp.UsernameValidator;
 import SignUp.NameValidator;
-import Login.LoginService;
 import Assets.Asset;
 import Assets.Portfolio;
 import Assets.AssetTypes;
-import zakat_calculation.ZakatReport;
-import java.util.HashMap;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -172,8 +170,113 @@ public class Main {
             }
         }
 
-//        Portfolio portfolio = new Portfolio();
-//
+
+        Portfolio portfolio = new Portfolio();
+        Random random = new Random();
+        int assetChoice = -1;
+
+        while (assetChoice != 6) {
+            System.out.println("\n------- Asset Management Menu -------");
+            System.out.println("1) Add asset");
+            System.out.println("2) Remove asset");
+            System.out.println("3) Edit asset");
+            System.out.println("4) View my assets");
+            System.out.println("5) Zakat calculation");
+            System.out.println("6) Exit");
+
+            System.out.print("Choose an option: ");
+            assetChoice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (assetChoice) {
+                case 1: // Add Asset
+                    System.out.println("Available asset types:");
+                    for (AssetTypes type : portfolio.getAvailableAssetTypes()) {
+                        System.out.println("- " + type);
+                    }
+
+                    System.out.print("Enter asset type: ");
+                    AssetTypes type = AssetTypes.valueOf(scanner.nextLine().toUpperCase());
+
+                    System.out.print("Enter asset name: ");
+                    String assetName = scanner.nextLine();
+
+                    System.out.print("Enter quantity: ");
+                    int quantity = scanner.nextInt();
+
+                    System.out.print("Enter price: ");
+                    double price = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    int id = random.nextInt(100000); // generate random asset ID
+                    Date now = new Date();
+
+                    Asset newAsset = new Asset(id, type, assetName, quantity, now, price, username);
+                    portfolio.addAsset(newAsset);
+                    System.out.println("Asset added successfully!");
+                    break;
+
+                case 2: // Remove Asset
+                    System.out.print("Enter asset ID to remove: ");
+                    int removeId = scanner.nextInt();
+                    scanner.nextLine();
+                    portfolio.removeAsset(removeId, username);
+                    System.out.println("Asset removed successfully!");
+                    break;
+
+                case 3: // Edit Asset
+                    System.out.print("Enter asset ID to edit: ");
+                    int editId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Asset asset = portfolio.getAsset(editId, username);
+                    if (asset == null) {
+                        System.out.println("Asset not found or does not belong to you.");
+                        break;
+                    }
+
+                    System.out.print("Enter new quantity: ");
+                    int newQty = scanner.nextInt();
+
+                    System.out.print("Enter new price: ");
+                    double newPrice = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    asset.setQuantity(newQty);
+                    asset.setPrice(newPrice);
+                    portfolio.editAsset(editId, asset);
+
+                    System.out.println("Asset updated successfully!");
+                    break;
+
+                case 4: // View Assets
+                    List<Asset> myAssets = portfolio.getUserAssets(username);
+                    if (myAssets.isEmpty()) {
+                        System.out.println("No assets found.");
+                    } else {
+                        System.out.println("Your assets:");
+                        for (Asset a : myAssets) {
+                            System.out.println(a);
+                        }
+                    }
+                    break;
+
+
+                case 5:
+                    /// ZAKAT IMPLEMENTATION
+
+                case 6:
+                    System.out.println("Exiting asset management...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+
+
+
+
 //        Asset asset1 = new Asset(1, AssetTypes.Stock, "Tesla", 10, new java.util.Date(), 700.0);
 //        Asset asset2 = new Asset(2, AssetTypes.Crypto, "Bitcoin", 2, new java.util.Date(), 30000.0);
 //
