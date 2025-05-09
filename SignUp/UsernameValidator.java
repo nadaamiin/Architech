@@ -1,20 +1,36 @@
 package SignUp;
+
 import Core.UserData;
 import Core.DatabaseConnector;
 
-// validating username
-// it extends the abstract class sign up validator
+/**
+ * Validates the username field during the sign-up process.
+ *
+ * <p>This validator ensures that the username:</p>
+ * <ul>
+ *     <li>Is not null</li>
+ *     <li>Has a maximum length of 50 characters</li>
+ *     <li>Is unique (not already present in the user database)</li>
+ * </ul>
+ */
 public class UsernameValidator extends SignUpValidator {
-    // object of database
-    // it uses the database class to compare with the usernames already stored to check for uniqueness
+
+    /** Connector to the user database for checking existing usernames. */
     private DatabaseConnector dbConnector;
 
+    /**
+     * Constructs a {@code UsernameValidator} and initializes the database connector.
+     */
     public UsernameValidator() {
         this.dbConnector = new DatabaseConnector("users.txt");
     }
 
-    // check the file of stored database to see if the username is unique or no
-    // and check to make sure username is unique, not empty and length <= 50
+    /**
+     * Validates the username of the given user.
+     *
+     * @param user the user data to validate
+     * @return true if the username is non-null, within length limits, and unique; false otherwise
+     */
     @Override
     public boolean validate(UserData user) {
         String username = user.getUsername();

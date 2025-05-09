@@ -5,43 +5,54 @@ import java.util.List;
 import Core.UserData;
 import Core.DatabaseConnector;
 
-// it validates the input data using sign up validator abstract class
-
+/**
+ * Handles the sign-up process for new users by validating input fields
+ * and storing user data using the {@link DatabaseConnector}.
+ *
+ * <p>This class uses the Strategy Pattern to apply multiple validation rules
+ * defined by implementations of {@link SignUpValidator}.</p>
+ */
 public class SignUpOperation implements SignUpService {
-    // uses database connector to get the stored data
     private DatabaseConnector dbConnector;
-    // storing the validators into a list to check each one individually
     private List<SignUpValidator> fields;
 
-    // constructor
+    /**
+     * Constructs a new SignUpOperation instance.
+     * Initializes the database connector and sets up the validators using the Strategy Pattern.
+     */
     public SignUpOperation() {
-
         this.dbConnector = new DatabaseConnector("users.txt");
         this.fields = new ArrayList<>();
 
-        // Strategy pattern is used
+        // Add all field-specific validators (strategies)
         fields.add(new UsernameValidator());
         fields.add(new PasswordValidator());
         fields.add(new NameValidator());
         fields.add(new EmailValidator());
     }
 
-    // implementing the signup method from the interface sign up service
+    /**
+     * Attempts to sign up a user by validating the input and saving the data if all fields pass.
+     *
+     * @param name     the full name of the user
+     * @param username the chosen username
+     * @param email    the user's email address
+     * @param password the chosen password
+     * @return true if the sign-up is successful; false otherwise
+     */
     @Override
     public boolean signup(String name, String username, String email, String password) {
-        // object of user data
         UserData user = new UserData(name, username, email, password);
 
-        // for each field, will check validation for it
+        // Validate each field using its validator
         for (SignUpValidator validator : fields) {
-            // if one of the fields didn't pass the validation check, will output invalid
             if (!validator.validate(user)) {
                 System.out.println("Sign up failed!!");
                 return false;
             }
         }
 
-        // else, validation successful and will add it to the file
+        // All validations passed; add user to storage
         dbConnector.addUser(user);
         System.out.println("\n--> Profile Created <--\n");
         return true;

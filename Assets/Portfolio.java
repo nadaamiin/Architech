@@ -2,21 +2,34 @@ package Assets;
 import java.io.*;
 import java.util.*;
 import java.lang.IllegalArgumentException;
-
 import Core.UserData;
+
+/**
+ * Represents a user's portfolio of assets and provides functionality
+ * to add, edit, remove, and retrieve assets from persistent storage.
+ */
 public class Portfolio {
 
     private static final String ASSETS_FILE = "assets.txt";
-    //Create list of Assets
     private java.util.List<Asset> assets = new java.util.ArrayList<>();
 
     private UserData user;
 
+    /**
+     * Returns the owner (user) of the portfolio.
+     *
+     * @return the {@link UserData} object representing the owner.
+     */
     public UserData getOwner() {
         return user;
     }
 
 
+    /**
+     * Adds an asset to the portfolio after validating it and saves it to the file.
+     *
+     * @param asset the asset to be added.
+     */
     public void addAsset(Asset asset) {
         if (validateAsset(asset)) {
             List<Asset> assets = loadAssetsFromFile();
@@ -25,6 +38,12 @@ public class Portfolio {
         }
     }
 
+    /**
+     * Edits an existing asset identified by its ID.
+     *
+     * @param assetID      the ID of the asset to edit.
+     * @param updatedAsset the new asset details to replace the old one.
+     */
     public void editAsset(int assetID, Asset updatedAsset) {
         if (!validateAsset(updatedAsset)) return;
 
@@ -39,12 +58,25 @@ public class Portfolio {
         }
     }
 
+    /**
+     * Removes an asset from the portfolio based on its ID and username.
+     *
+     * @param assetID  the ID of the asset to be removed.
+     * @param username the username of the asset's owner.
+     */
     public void removeAsset(int assetID, String username) {
         List<Asset> assets = loadAssetsFromFile();
         assets.removeIf(asset -> asset.getAssetID() == assetID && asset.getUsername().equals(username));
         saveAssetsToFile(assets);
     }
 
+    /**
+     * Retrieves a specific asset by ID and username.
+     *
+     * @param assetID  the ID of the asset.
+     * @param username the username of the asset owner.
+     * @return the matching {@link Asset} or null if not found.
+     */
     public Asset getAsset(int assetID, String username) {
         for (Asset asset : loadAssetsFromFile()) {
             if (asset.getAssetID() == assetID && asset.getUsername().equals(username)) {
@@ -54,10 +86,21 @@ public class Portfolio {
         return null;
     }
 
+    /**
+     * Returns a list of all assets stored in the portfolio.
+     *
+     * @return a list of all {@link Asset} instances.
+     */
     public List<Asset> getAllAssets() {
         return loadAssetsFromFile();
     }
 
+    /**
+     * Returns a list of assets belonging to a specific user.
+     *
+     * @param username the username to filter assets by.
+     * @return a list of {@link Asset} objects for that user.
+     */
     public List<Asset> getUserAssets(String username) {
         List<Asset> userAssets = new ArrayList<>();
         for (Asset asset : loadAssetsFromFile()) {
@@ -68,15 +111,31 @@ public class Portfolio {
         return userAssets;
     }
 
+    /**
+     * Validates the given asset to ensure it has valid data.
+     *
+     * @param asset the asset to validate.
+     * @return true if the asset is valid, false otherwise.
+     */
     private boolean validateAsset(Asset asset) {
         return asset.getName() != null && !asset.getName().isEmpty() &&
                 asset.getQuantity() > 0 && asset.getPrice() >= 0;
     }
 
+    /**
+     * Returns a list of all available asset types.
+     *
+     * @return a list of {@link AssetTypes} enums.
+     */
     public List<AssetTypes> getAvailableAssetTypes() {
         return Arrays.asList(AssetTypes.values());
     }
 
+    /**
+     * Saves the given list of assets to a file for persistence.
+     *
+     * @param assets the list of assets to save.
+     */
     private void saveAssetsToFile(List<Asset> assets) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ASSETS_FILE))) {
             for (Asset asset : assets) {
@@ -94,6 +153,12 @@ public class Portfolio {
         }
     }
 
+
+    /**
+     * Loads all assets from the persistent file.
+     *
+     * @return a list of loaded {@link Asset} objects.
+     */
     private List<Asset> loadAssetsFromFile() {
         List<Asset> assets = new ArrayList<>();
         File file = new File(ASSETS_FILE);

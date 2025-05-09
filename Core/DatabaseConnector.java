@@ -1,20 +1,35 @@
 package Core;
+
 import java.io.*;
 import java.util.*;
 
-// database connector which stores the data of the new users into the file
+/**
+ * Responsible for handling database operations related to user data.
+ * This class provides methods to add users to a file, search for users by username,
+ * and retrieve all stored users for authentication and other purposes.
+ */
 public class DatabaseConnector {
+    /**
+     * The file path where user data is stored.
+     */
     private final String filePath;
 
-    // constructor
-
+    /**
+     * Constructs a {@code DatabaseConnector} with the specified file path.
+     *
+     * @param filePath the file path where the user data will be stored
+     */
     public DatabaseConnector(String filePath) {
         this.filePath = filePath;
     }
 
-    // adding a new user
+    /**
+     * Adds a new user to the database by appending the user's details to a file.
+     * The user details are written in the following format: name, username, email, password.
+     *
+     * @param user the {@link UserData} object containing the user's information
+     */
     public void addUser(UserData user) {
-        // writing into the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(user.getName() + "," + user.getUsername() + "," + user.getEmail() + "," + user.getPassword());
             writer.newLine();
@@ -23,36 +38,40 @@ public class DatabaseConnector {
         }
     }
 
-    // searching if a user exists using the given new username
+    /**
+     * Searches for a user by their username in the database file.
+     *
+     * @param username the username to search for
+     * @return {@code true} if the username exists in the file, {@code false} otherwise
+     */
     public boolean searchForUser(String username) {
-        // extracting the data that is stored in the file
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                // checking if the stored username is equal to the input username
                 if (fields.length > 1 && fields[1].equals(username)) {
-                    return true; // username found so not unique
+                    return true; // Username found
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // username not found, so input username is unique
-        return false;
+        return false; // Username not found
     }
 
-    // getting the list of the stored data of users in the file
-    // used inorder to check the usernames and passwords if they match the input during log in process
+    /**
+     * Retrieves the list of stored users from the database file.
+     * This is used for validating login credentials, checking usernames and passwords.
+     *
+     * @return a list of {@link UserData} objects representing all users in the file
+     */
     public List<UserData> getStoredUsers() {
         List<UserData> users = new ArrayList<>();
 
-        // reading from the file
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // taking each line, extracting each field alone, and adding it to the list
                 String[] fields = line.split(",");
                 if (fields.length == 4) {
                     users.add(new UserData(fields[0], fields[1], fields[2], fields[3]));
