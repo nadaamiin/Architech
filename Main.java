@@ -197,8 +197,16 @@ public class Main {
                         System.out.println("- " + type);
                     }
 
-                    System.out.print("Enter asset type: ");
-                    AssetTypes type = AssetTypes.valueOf(scanner.nextLine().toUpperCase());
+                    AssetTypes type = null;
+                    while (type == null) {
+                        System.out.print("Enter asset type: ");
+                        String input = scanner.nextLine().trim().toUpperCase();
+                        try {
+                            type = AssetTypes.valueOf(input);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid asset type. Try again!");
+                        }
+                    }
 
                     System.out.print("Enter asset name: ");
                     String assetName = scanner.nextLine();
