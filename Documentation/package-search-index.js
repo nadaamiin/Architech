@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"Add_card"},{"l":"All Packages","u":"allpackages-index.html"},{"l":"Assets"},{"l":"Core"},{"l":"Login"},{"l":"SignUp"},{"l":"zakat_calculation"}];updateSearchResults();
