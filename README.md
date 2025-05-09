@@ -12,7 +12,7 @@
 
 ## Files Included
 1. Core Components 
-   - DatabaseConnector.java: Manages MySQL database connections 
+   - DatabaseConnector.java: Manages connection to users data from files 
    - UserData.java: Handles user profile information
 
 2. Banking Module (Add_card/)
