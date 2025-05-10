@@ -54,49 +54,6 @@ public class ZakatReport {
         }
     }
 
-//    public void generatePdf(String filename) {
-//        Document document = new Document();
-//        try {
-//            PdfWriter.getInstance(document, new FileOutputStream(filename));
-//            document.open();
-//
-//            // Add title
-//            Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
-//            Paragraph title = new Paragraph("Zakat Calculation Report", titleFont);
-//            title.setAlignment(Element.ALIGN_CENTER);
-//            document.add(title);
-//
-//            // Add date
-//            Font normalFont = new Font(Font.FontFamily.HELVETICA, 12);
-//            String formattedDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
-//            document.add(new Paragraph("Report Date: " + formattedDate, normalFont));
-//            document.add(Chunk.NEWLINE);
-//
-//            // Add assets section
-//            Paragraph assetsHeader = new Paragraph("Assets Included in Calculation:",
-//                    new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
-//            document.add(assetsHeader);
-//
-//            for (Asset asset : assets) {
-//                document.add(new Paragraph("- " + asset.getName() + ": " + asset.getQuantity() +
-//                        " (Type: " + asset.getAssetType() + ")", normalFont));
-//            }
-//
-//            document.add(Chunk.NEWLINE);
-//
-//            // Add total zakat
-//            Paragraph total = new Paragraph("Total Zakat Due: " + totalZakatDue,
-//                    new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD));
-//            document.add(total);
-//
-//            document.close();
-//            System.out.println("PDF report generated successfully: " + filename);
-//        } catch (Exception e) {
-//            System.err.println("Error generating PDF: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-
     /**
      * Returns the total zakat due for all the assets in the report.
      *
